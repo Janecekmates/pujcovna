@@ -1,0 +1,36 @@
+{% extends "pujcovna/layout.html" %}
+ 
+{% block title %}Úvod{% endblock %}
+ 
+{% load static %}
+ 
+{% block content %}
+<div class="text-center mb-4">
+    <h1 class="display-4">Vozový park</h1>
+    <p class="lead">Vyberte si z naší nabídky kvalitních vozidel.</p>
+</div>
+ 
+<div class="row">
+    {% for auto in auta %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+           <img src="{% if auto.foto %}{{ auto.foto.url }}{% else %}{% static 'obrazky/placeholder.jpg' %}{% endif %}" class="card-img-top" alt="{{ auto.Znacka }}">
+
+            <div class="card-body">
+                <h5 class="card-title">{{ auto.Znacka }} {{ auto.Model }}</h5>
+                <p class="card-text">
+                    Rok: {{ auto.Rok_vyroby }}<br>
+                    Motor: {{ auto.Motor }}<br>
+                    Palivo: {{ auto.Palivo }}<br>
+                    Převodovka: {{ auto.Prevodovka }}<br>
+                    Výkon: {{ auto.Vykon }} HP<br>
+                    Kategorie: {{ auto.Kategorie }}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">Zatím žádná auta nejsou k dispozici.</p>
+    {% endfor %}
+</div>
+{% endblock %}

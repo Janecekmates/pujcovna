@@ -1,0 +1,38 @@
+{% extends "pujcovna/layout.html" %}
+ 
+{% block title %}Půjčky{% endblock %}
+ 
+{% block content %}
+<h2 class="mb-4">Seznam půjček</h2>
+ 
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th>Auto</th>
+                <th>SPZ</th>
+                <th>Od</th>
+                <th>Do</th>
+                <th>Cena / den</th>
+                <th>Počet dní</th>
+                <th>Celkem</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for zaznam in pujcky_data %}
+            <tr>
+                <td>{{ zaznam.pujcka.auto.Znacka }} {{ zaznam.pujcka.auto.Model }}</td>
+                <td>{{ zaznam.pujcka.auto.SPZ }}</td>
+                <td>{{ zaznam.pujcka.Den_pujceni }}</td>
+                <td>{{ zaznam.pujcka.Den_vraceni }}</td>
+                <td>{{ zaznam.pujcka.penize_za_den }} Kč</td>
+                <td>{{ zaznam.pocet_dni }}</td>
+                <td>{{ zaznam.celkova_cena }} Kč</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7">Žádné půjčky zatím nejsou k dispozici.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
